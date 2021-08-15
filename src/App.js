@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import Formulario from "./components/Formulario";
 
 const Container = styled.div`
   max-width: 900px;
@@ -35,6 +36,7 @@ function App() {
     <Container>
       <div>
         <Heading>Cryptocurrencies Exchange</Heading>
+        <Formulario />
       </div>
     </Container>
   );
