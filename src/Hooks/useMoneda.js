@@ -1,4 +1,17 @@
 import React, { Fragment, useState } from 'react';
+import Label from './useMoneda.styled.js'
+import styled from "@emotion/styled";
+
+const Select = styled.select`
+    width: 100%;
+    display: block;
+    padding: 1rem;
+    -webkit-appearance: none;
+    border-radius: 10px;
+    margin-top: 15px;
+    border: none;
+    font-size: 1.2rem;
+`;
 
 const useMoneda = (label, stateInicial, opciones) => {
    
@@ -7,8 +20,8 @@ const useMoneda = (label, stateInicial, opciones) => {
 
     const Seleccionar = () => (
         <Fragment>
-            <label>{label}</label>
-            <select
+            <Label>{label}</Label>
+            <Select
                 onChange={ e => actualizarState(e.target.value)}
                 value={state}
             >
@@ -16,7 +29,7 @@ const useMoneda = (label, stateInicial, opciones) => {
                 {opciones.map(opcion =>(
                     <option key={opcion.codigo} value={opcion.codigo}>{opcion.nombre}</option>
                 ))}
-            </select>
+            </Select>
         </Fragment>
     );
 
