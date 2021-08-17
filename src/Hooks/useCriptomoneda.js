@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import Label from './useMoneda.styled.js'
+import Label from './useCriptomoneda.styled.js'
 import styled from "@emotion/styled";
 
 const Select = styled.select`
@@ -13,12 +13,12 @@ const Select = styled.select`
     font-size: 1.2rem;
 `;
 
-const useMoneda = (label, stateInicial, opciones) => {
+const useCriptomoneda = (label, stateInicial, opciones) => {
    
     //State de custom Hook
     const [state, actualizarState] = useState(stateInicial)
 
-    const Seleccionar = () => (
+    const SelectCripto = () => (
         <Fragment>
             <Label>{label}</Label>
             <Select
@@ -26,16 +26,16 @@ const useMoneda = (label, stateInicial, opciones) => {
                 value={state}
             >
                 <option value="">--Seleccione moneda--</option>
-                {opciones.map(opcion =>(
+                {/* {opciones.map(opcion =>(
                     <option key={opcion.codigo} value={opcion.codigo}>{opcion.nombre}</option>
-                ))}
+                ))} */}
             </Select>
         </Fragment>
     );
 
     // Devuelve state, interfaz y función que modifica el state.
-    return [state, Seleccionar, actualizarState];
+    return [state, SelectCripto, actualizarState];
 
 }
  
-export default useMoneda;
+export default useCriptomoneda;
