@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import Formulario from "./components/Formulario";
+import axios from "axios";
 
 const Container = styled.div`
   max-width: 900px;
@@ -13,35 +14,49 @@ const Container = styled.div`
 `;
 
 const Heading = styled.h1`
-  font-family: 'Bebas Neue', cursive;
-  color: #FFF;
+  font-family: "Bebas Neue", cursive;
+  color: #fff;
   text-align: left;
   font-weight: 700;
   font-size: 50px;
   margin-bottom: 50px;
   margin-top: 80px;
 
-    &::after {
-      content: '';
-      width:100px;
-      height: 6px;
-      background-color: #66A2FE;
-      display: block;
-    }
+  &::after {
+    content: "";
+    width: 100px;
+    height: 6px;
+    background-color: #66a2fe;
+    display: block;
+  }
 `;
 
-
 function App() {
-
   // State
-  const [moneda, guardarMoneda] = useState('');
-  const [criptomoneda, guardarCriptomoneda] = useState('');
+  const [moneda, guardarMoneda] = useState("");
+  const [criptomoneda, guardarCriptomoneda] = useState("");
+
+  useEffect(() => {
+
+    const cotizarCriptomoneda = async () => {
+      // Evitamos la ejecución la primera vez
+      if (moneda === "") return;
+
+      // consultar la API
+      const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`;
+
+      const resultado = await axios.get(url);
+
+      console.log(resultado);
+    };
+    cotizarCriptomoneda();
+  }, [moneda, criptomoneda]);
 
   return (
     <Container>
       <div>
         <Heading>Cryptocurrencies Exchange</Heading>
-        <Formulario 
+        <Formulario
           guardarMoneda={guardarMoneda}
           guardarCriptomoneda={guardarCriptomoneda}
         />
