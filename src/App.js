@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import Formulario from "./components/Formulario";
 
@@ -32,11 +32,19 @@ const Heading = styled.h1`
 
 
 function App() {
+
+  // State
+  const [moneda, guardarMoneda] = useState('');
+  const [criptomoneda, guardarCriptomoneda] = useState('');
+
   return (
     <Container>
       <div>
         <Heading>Cryptocurrencies Exchange</Heading>
-        <Formulario />
+        <Formulario 
+          guardarMoneda={guardarMoneda}
+          guardarCriptomoneda={guardarCriptomoneda}
+        />
       </div>
     </Container>
   );
