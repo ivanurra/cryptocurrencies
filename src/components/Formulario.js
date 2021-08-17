@@ -6,24 +6,24 @@ import axios from "axios";
 import Error from "./Error";
 
 const Boton = styled.input`
-    margin-top: 20px;
-    font-weight: bold;
-    font-size: 20px;
-    padding: 10px;
-    background-color: #66a2fe
-    border: none;
-    width: 100%;
-    border-radius: 10px;
-    color: black;
-    transition: background-color .3s ease;
-    
-    &:hover {
-        background-color: lightgreen;
-        cursor: pointer;
-    }
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 10px;
+  background-color: #66a2fe;
+  border: none;
+  width: 100%;
+  border-radius: 10px;
+  color: black;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: lightgreen;
+    cursor: pointer;
+  }
 `;
 
-const Formulario = ({guardarMoneda, guardarCriptomoneda}) => {
+const Formulario = ({ guardarMoneda, guardarCriptomoneda }) => {
   // State del listado de criptomonedas
 
   const [listacripto, guardarCriptomonedas] = useState([]);

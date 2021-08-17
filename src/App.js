@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import Formulario from "./components/Formulario";
 import axios from "axios";
+import Resultado from "./components/Resultado";
+import Spinner from "./components/Spinner";
 
 const Container = styled.div`
   max-width: 900px;
@@ -35,9 +37,10 @@ function App() {
   // State
   const [moneda, guardarMoneda] = useState("");
   const [criptomoneda, guardarCriptomoneda] = useState("");
+  const [resultado, guardarResultado] = useState({});
+  const [cargando, guardarCargando] = useState(false);
 
   useEffect(() => {
-
     const cotizarCriptomoneda = async () => {
       // Evitamos la ejecución la primera vez
       if (moneda === "") return;
@@ -47,10 +50,26 @@ function App() {
 
       const resultado = await axios.get(url);
 
-      console.log(resultado);
+      // Spinner
+      guardarCargando(true);
+
+      // Octular el spinery y mostrar el resultado
+      setTimeout(() => {
+        // cambiar el STATE de cargando
+        guardarCargando(false);
+        // guardar cotización
+        guardarResultado(resultado.data.DISPLAY[criptomoneda][moneda]);
+      }, 3000);
     };
     cotizarCriptomoneda();
   }, [moneda, criptomoneda]);
+
+  // Mostrar spinner o resultado
+  const componente = cargando ? (
+    <Spinner />
+  ) : (
+    <Resultado resultado={resultado} />
+  );
 
   return (
     <Container>
@@ -60,6 +79,7 @@ function App() {
           guardarMoneda={guardarMoneda}
           guardarCriptomoneda={guardarCriptomoneda}
         />
+        {componente}
       </div>
     </Container>
   );
